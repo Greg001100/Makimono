@@ -16,6 +16,7 @@ psycopg2-binary = "*"
 flask-cors = "*"
 werkzeug = "*"
 flask-jwt-extended = "*"
+flask-wtf = "*"
 
 [requires]
 python_version = "3.8"

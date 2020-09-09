@@ -1,28 +1,29 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import SignIn from "./components/SignIn.js";
+import SignUp from "./components/SignUp.js";
+import Dashboard from "./components/Dashboard.js";
+import LandingPage from "./components/LandingPage.js";
 
-import UserList from './components/UsersList';
-
+import { PrivateRoute } from "./utilities/authUtils";
 
 function App() {
+  const needSignIn = useSelector((state) => !state.authentication.token);
 
   return (
     <BrowserRouter>
-        <nav>
-            <ul>
-                <li><NavLink to="/" activeclass="active">Home</NavLink></li>
-                <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-            </ul>
-        </nav>
-        <Switch>
-            <Route path="/users">
-                <UserList />
-            </Route>
-
-            <Route path="/">
-                <h1>My Home Page</h1>
-            </Route>
-        </Switch>
+      <Switch>
+        <Route path="/" exact component={LandingPage} />
+        <Route path="/signup" exact component={SignUp} />
+        <Route path="/signin" exact component={SignIn} />
+        <PrivateRoute
+          path="/dashboard"
+          needSignIn={needSignIn}
+          exact
+          component={Dashboard}
+        />
+      </Switch>
     </BrowserRouter>
   );
 }
