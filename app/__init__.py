@@ -39,7 +39,6 @@ CORS(app)
 
 @app.after_request
 def inject_csrf_token(response):
-    print('after request')
     response.set_cookie('csrf_token',
         generate_csrf(),
         secure=True if os.environ.get('FLASK_ENV') else False,
