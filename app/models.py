@@ -6,6 +6,14 @@ import re
 
 db = SQLAlchemy()
 
+#join table for shared notes between users
+user_shared_notes= db.Table(
+  'user_shared_notes',
+  db.Model.metadata,
+  db.Column('shared_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+  db.Column('note_id', db.Integer, db.ForeignKey('notes.id'), primary_key=True)
+)
+
 class User(db.Model):
   __tablename__ = 'users'
 
@@ -18,17 +26,10 @@ class User(db.Model):
   created_at = db.Column(db.DateTime, default=datetime.datetime.now)
   updated_at = db.Column(db.DateTime, onupdate=datetime.datetime.now)
 
-  # credit_transactions = db.relationship("Transaction", foreign_keys= "Transaction.payee_id", backref="payee", cascade="all, delete-orphan", lazy="dynamic")
-  # debit_transactions = db.relationship("Transaction", foreign_keys="Transaction.payer_id", backref="payer", cascade="all, delete-orphan", lazy="dynamic")
-  # comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan")
-  # likes = db.relationship("Like", back_populates="user", cascade="all, delete-orphan")
-
-
-  # friends = db.relationship('User',
-  #                         secondary=Friendship.__table__,
-  #                         primaryjoin=id==Friendship.user_first_id,
-  #                         secondaryjoin=id==Friendship.user_second_id,
-  #                         cascade="all")
+  notebooks= db.relationship('Notebook', back_populates='user', cascade="all, delete-orphan")
+  notes= db.relationship('Note', back_populates='owner', cascade="all, delete-orphan")
+  #notes shared with this user:
+  shared_notes = db.relationship('Note', secondary=user_shared_notes, back_populates='users')
 
   def to_dict(self):
     return {
@@ -63,3 +64,52 @@ class User(db.Model):
 
   def check_password(self, password):
       return check_password_hash(self.password, password)
+
+class Notebook(db.Model):
+  __tablename__='notebooks'
+
+  id = db.Column(db.Integer, primary_key = True)
+  user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
+  title = db.Column(db.String(50), nullable=False)
+  shortcut = db.Column(db.Boolean, nullable = False)
+  created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+  updated_at = db.Column(db.DateTime, onupdate=datetime.datetime.now)
+
+  user= db.relationship('User', back_populates='notebooks')
+  notes= db.relationship('Note', back_populates='notebook', cascade="all, delete-orphan")
+
+#note and tags join table
+note_tags= db.Table(
+'note_tags',
+db.Model.metadata,
+db.Column('note_id', db.Integer, db.ForeignKey('notes.id'), primary_key=True),
+db.Column('tag_id', db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+)
+
+class Note(db.Model):
+  __tablename__='notes'
+
+  id = db.Column(db.Integer, primary_key = True)
+  owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
+  notebook_id = db.Column(db.Integer, db.ForeignKey("notebooks.id"), nullable = False)
+  title = db.Column(db.String(50))
+  content = db.Column(db.Text)
+  shortcut = db.Column(db.Boolean, nullable = False)
+  created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+  updated_at = db.Column(db.DateTime, onupdate=datetime.datetime.now)
+
+  owner= db.relationship('User', back_populates='notes')
+  notebook=db.relationship('Notebook', back_populates='notes')
+  #users this note is shared with:
+  users = db.relationship('User', secondary=user_shared_notes, back_populates='shared_notes')
+  tags = db.relationship('Tag', secondary=note_tags, back_populates='notes')
+
+class Tag(db.Model):
+  __tablename__='tags'
+
+  id = db.Column(db.Integer, primary_key = True)
+  name= db.Column(db.String(50), nullable=False)
+  created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+  updated_at = db.Column(db.DateTime, onupdate=datetime.datetime.now)
+
+  notes= db.relationship('Note', secondary=note_tags, back_populates='tags')

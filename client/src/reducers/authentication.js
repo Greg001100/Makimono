@@ -3,6 +3,7 @@ import {
     SET_USER,
     REMOVE_AUTH,
     VAL_ERRORS,
+    SET_CSRF_COOKIE,
   } from '../actions/authentication';
 
   const authReducer = (state = {}, action) => {
@@ -23,6 +24,12 @@ import {
         nextState = {};
         return nextState;
       }
+
+      case SET_CSRF_COOKIE: {
+        nextState = {...nextState, csurf: action.cookie};
+        return nextState;
+      }
+
       case VAL_ERRORS: {
         nextState = {...nextState, valErrors: action.valErrors}
         return nextState;

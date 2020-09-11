@@ -12,12 +12,14 @@ function SignUp() {
   const dispatch = useDispatch();
   const history = useHistory();
   const valErrors = useSelector((state) => state.authentication.valErrors);
+  const csurf_token = useSelector((state) => state.authentication.csurf)
 
   const handleSubmit = async (e) => {
+    const csurf = csurf_token
     e.preventDefault();
     await dispatch(removeAuth());
     const storeReady = await dispatch(
-      signUp(firstName, lastName, email, password)
+      signUp(firstName, lastName, email, password, csurf)
     );
     if (storeReady) {
       history.push("/dashboard");

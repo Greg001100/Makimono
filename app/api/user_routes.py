@@ -1,9 +1,17 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, make_response
 from ..models import User, db
 from flask_jwt_extended import jwt_optional, create_access_token, get_jwt_identity, jwt_required, get_raw_jwt
 from flask_wtf.csrf import CSRFProtect, generate_csrf, validate_csrf
 
-user_routes = Blueprint("user", __name__, "/user")
+user_routes = Blueprint("user", __name__, url_prefix="/user")
+
+@user_routes.route('/csrf')
+def send_csrf():
+  try:
+    return {'msg':'csurf set'}, 200
+  except:
+    print('something went wrong')
+
 
 @user_routes.route('/signup', methods=['POST'])
 def sign_up():
@@ -27,14 +35,17 @@ def sign_up():
     return jsonify(msg='Error: {}. '.format(exception_message)), 400
 
 @user_routes.route('/signin', methods=['POST'])
+
 def sign_in():
 
     try:
+
       if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
       email = request.json.get('email', None)
       password = request.json.get('password', None)
+
 
       if not email:
         return jsonify({"msg": "Missing email parameter"}), 400
@@ -45,7 +56,8 @@ def sign_in():
 
       if (user.check_password(password)):
         access_token = create_access_token(identity=email)
-        return {"token": access_token, "user": user.to_dict()}, 200
+        response= make_response({"token": access_token, "user": user.to_dict()})
+        return response, 200
       else:
         return jsonify({"msg": "Bad email or password"}), 400
 

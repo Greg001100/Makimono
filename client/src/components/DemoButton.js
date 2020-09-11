@@ -25,10 +25,8 @@ export default function DemoButton ({ email, setEmail, password, setPassword }) 
   }
 
   function typePassword() {
-      console.log(k)
     if (k < pwd.length) {
       setPassword(password += pwd.charAt(k))
-      console.log(password)
       k++;
       setTimeout(typePassword, spd);
     } else {
