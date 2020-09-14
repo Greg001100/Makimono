@@ -8,18 +8,20 @@ from flask_jwt_extended import JWTManager, jwt_required, get_raw_jwt
 from app.config import Config
 from app.models import db, User
 from app.api.user_routes import user_routes
+from app.api.note_routes import note_routes
 
 
 app = Flask(__name__, static_url_path='')
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes)
+app.register_blueprint(note_routes)
 db.init_app(app)
 migrate = Migrate(app, db)
 
 ## Application Security
 jwt = JWTManager(app)
-csrf=CSRFProtect(app)
+# csrf=CSRFProtect(app)
 blacklist=set()
 
 
@@ -29,7 +31,7 @@ def check_if_token_in_blacklist(decrypted_token):
     return jti in blacklist
 
 @app.route('/logout', methods=["DELETE"])
-@csrf.exempt
+# @csrf.exempt
 @jwt_required
 def logout():
     jti = get_raw_jwt()['jti']

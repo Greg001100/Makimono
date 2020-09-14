@@ -21,7 +21,14 @@ note_routes = Blueprint("notes", __name__, url_prefix="")
     "shortcut": false
 }
 '''
-@note_routes.route('/note/new')
+@note_routes.route('/note/new', methods=['POST'])
+def create_note():
+    data= request.json
+    note = Note(**data)
+    note.updated_at = datetime.datetime.now()
+    db.session.add(note)
+    db.session.commit()
+    return note.to_dict(), 200
 
 
 #Update a note

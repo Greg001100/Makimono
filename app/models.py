@@ -104,6 +104,16 @@ class Note(db.Model):
   users = db.relationship('User', secondary=user_shared_notes, back_populates='shared_notes')
   tags = db.relationship('Tag', secondary=note_tags, back_populates='notes')
 
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "title": self.title,
+      "notebook": self.notebook.title,
+      "content": self.content,
+      "owner": self.owner.id,
+      "tags": self.tags
+    }
+
 class Tag(db.Model):
   __tablename__='tags'
 

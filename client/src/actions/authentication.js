@@ -1,5 +1,4 @@
 import { baseUrl } from "../config";
-import { useSelector } from "react-redux";
 
 const TOKEN_KEY = "MAKIMONO_TOKEN";
 const CURRENT_USER = "CURRENT_USER";
