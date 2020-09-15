@@ -39,6 +39,9 @@ class User(db.Model):
       "full_name": (self.first_name + ' ' + self.last_name),
       "email": self.email,
       "picUrl": self.picUrl,
+      "notebooks": [notebook.id for notebook in self.notebooks],
+      "notes": [note.id for note in self.notes],
+      "latest_note": [self.notes[-1].notebook_id, self.notes[-1].id]
     }
 
   @validates('email')
@@ -111,7 +114,8 @@ class Note(db.Model):
       "notebook": self.notebook.title,
       "content": self.content,
       "owner": self.owner.id,
-      "tags": self.tags
+      "tags": self.tags,
+      "shortcut": self.shortcut
     }
 
 class Tag(db.Model):

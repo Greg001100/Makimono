@@ -10,6 +10,11 @@ note_routes = Blueprint("notes", __name__, url_prefix="")
 #Get all notebooks and associated notes
 
 #Get all notes shared with user
+#Get note details
+@note_routes.route('/note/<int:noteId>')
+def get_note_details(noteId):
+    note= Note.query.get(noteId)
+    return note.to_dict(),200
 
 #Post new note
 '''request json should look like this:
@@ -32,13 +37,19 @@ def create_note():
 
 
 #Update a note
-
+@note_routes.route('/note/update', methods=['PUT'])
+def update_note():
+    data = request.json
+    note= Note.query.get(data["note_id"])
+    db.session.add(note)
+    note.title = data["title"]
+    note.notebook_id = data["notebook_id"]
+    note.content = data["content"]
+    note.shortcut = data["shortcut"]
+    db.session.commit()
+    return note.to_dict(), 200
 #Post new notebook
 
-#Change notebook name
+#Change notebook name/add to shortcut
 
-#Move note to another notebook
-
-#Include note in shortcuts
-
-#Include notebook in shortcuts
+#create a tag

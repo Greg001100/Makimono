@@ -21,7 +21,8 @@ function SignIn() {
       signIn(email, password, csurf)
     );
     if (storeReady) {
-      history.push("/dashboard");
+      console.log(storeReady)
+      history.push(`/dashboard/${storeReady.latest_note[0]}/${storeReady.latest_note[1]}`);
     }
   };
 

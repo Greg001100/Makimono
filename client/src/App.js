@@ -41,7 +41,7 @@ function App() {
         <Route path="/signin" exact component={SignIn} />
         <Route path="/editor" exact component={NoteEditor} />
         <PrivateRoute
-          path="/dashboard"
+          path="/dashboard/:notebookId/:noteId"
           needSignIn={needSignIn}
           exact
           component={Dashboard}

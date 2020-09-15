@@ -91,7 +91,7 @@ export const signIn = (email, password, csurf) => async (dispatch) => {
     window.localStorage.setItem(CURRENT_USER, JSON.stringify(user));
     dispatch(setToken(token));
     dispatch(setUser(user));
-    return true;
+    return user;
   } else {
     const valErrors = await response.json();
     dispatch(setValErrors(valErrors));

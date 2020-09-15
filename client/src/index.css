@@ -3,3 +3,11 @@
     color: red;
     font-size: .75em;
 }
+
+.bg-darker {
+    background-color: rgb(26, 22, 22);
+}
+
+.bg-lightgray {
+    background-color: rgb(245, 245, 245);
+}
