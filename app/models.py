@@ -81,6 +81,14 @@ class Notebook(db.Model):
   user= db.relationship('User', back_populates='notebooks')
   notes= db.relationship('Note', back_populates='notebook', cascade="all, delete-orphan")
 
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "title": self.title,
+      "shortcut": self.shortcut,
+      "latest_note": self.notes[-1].id
+    }
+
 #note and tags join table
 note_tags= db.Table(
 'note_tags',
@@ -111,7 +119,7 @@ class Note(db.Model):
     return {
       "id": self.id,
       "title": self.title,
-      "notebook": self.notebook.title,
+      "notebook": self.notebook.id,
       "content": self.content,
       "owner": self.owner.id,
       "tags": self.tags,

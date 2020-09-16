@@ -5,11 +5,27 @@ import datetime
 
 note_routes = Blueprint("notes", __name__, url_prefix="")
 
-#Get all notes by updated
+#Get all notes
 
-#Get all notebooks and associated notes
+#Get Notebook List
+@note_routes.route('/<userId>/notebooks')
+def get_notebooks(userId):
+    user = User.query.get(userId)
+    notebooks = user.notebooks
+    data=[notebook.to_dict() for notebook in notebooks]
+    print('DATAAAAA', data)
+    return {'data': data}, 200
+
+#Get all notes in a notebook
+@note_routes.route('/<notebookId>/notes')
+def get_associated_notes(notebookId):
+    notebook= Notebook.query.get(notebookId)
+    print(notebook.notes)
+    data = [note.to_dict() for note in notebook.notes]
+    return {'data': data}, 200
 
 #Get all notes shared with user
+
 #Get note details
 @note_routes.route('/note/<int:noteId>')
 def get_note_details(noteId):

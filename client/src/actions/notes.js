@@ -53,3 +53,27 @@ export const getNote = (noteId) => async (dispatch) => {
       return note;
     }
   };
+
+export const getList = (notebookId) => async (dispatch) => {
+    const response = await fetch(`${baseUrl}/${notebookId}/notes`, {
+      method: "get",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      const list = await response.json();
+      return list;
+    }
+  };
+
+  export const getNotebooks = (userId) => async (dispatch) => {
+    const response = await fetch(`${baseUrl}/${userId}/notebooks`, {
+      method: "get",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      const list = await response.json();
+      return list;
+    }
+  };

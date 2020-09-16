@@ -24,7 +24,7 @@ def sign_up():
       email=data['email'],
       picUrl=data['picture'],
       )
-
+# create all notebook, create first notebook, create first note
     user.set_password(data['password'])
     db.session.add(user)
     db.session.commit()

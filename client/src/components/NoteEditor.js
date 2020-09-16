@@ -24,11 +24,6 @@ const NoteEditor = (props) => {
     setContent(changes);
   };
 
-  const handleCreate = async () => {
-    const createdNote = await dispatch(createNote(4, 1, "demo note", content));
-    await console.log(createdNote);
-  };
-
   const handleSave = async () => {
     const savedNote = await dispatch(
       updateNote(2, "updated", 1, content, false)
@@ -62,7 +57,6 @@ const NoteEditor = (props) => {
           ],
         }}
       />
-      <Button onClick={handleCreate}>create</Button>
       <Button onClick={handleSave}>save</Button>
     </>
   );
