@@ -6,6 +6,12 @@ import datetime
 
 user_routes = Blueprint("user", __name__, url_prefix="/user")
 
+@user_routes.route('/jsonify')
+def jsontest():
+  trip="yoink"
+  invites="doink"
+  return jsonify(trip=trip, invites=invites)
+
 @user_routes.route('/csrf')
 def send_csrf():
   try:

@@ -15,3 +15,15 @@
 .sp-text {
     color: rgb(192, 192, 192);
 }
+
+button {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+}
+
+button:focus{
+    outline: none;
+}

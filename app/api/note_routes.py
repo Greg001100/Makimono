@@ -5,7 +5,12 @@ import datetime
 
 note_routes = Blueprint("notes", __name__, url_prefix="")
 
-#Get all notes
+#Get all notes for a user
+@note_routes.route('/<userId>/notes/all')
+def get_all_notes(userId):
+    user=User.query.get(userId)
+    data=[note.to_dict() for note in reversed(user.notes)]
+    return {'data': data}, 200
 
 #Get Notebook List
 @note_routes.route('/<userId>/notebooks')
@@ -13,18 +18,28 @@ def get_notebooks(userId):
     user = User.query.get(userId)
     notebooks = user.notebooks
     data=[notebook.to_dict() for notebook in notebooks]
-    print('DATAAAAA', data)
     return {'data': data}, 200
+
+#Get Notebook name
+@note_routes.route('/<notebookId>/name')
+def get_book_name(notebookId):
+    notebook= Notebook.query.get(notebookId)
+    return {'data': notebook.title}, 200
 
 #Get all notes in a notebook
 @note_routes.route('/<notebookId>/notes')
 def get_associated_notes(notebookId):
     notebook= Notebook.query.get(notebookId)
-    print(notebook.notes)
-    data = [note.to_dict() for note in notebook.notes]
+    data = [note.to_dict() for note in reversed(notebook.notes)]
     return {'data': data}, 200
 
-#Get all notes shared with user
+#Get all user shortcuts
+@note_routes.route('/<userId>/shortcuts')
+def get_all_shortcuts(userId):
+    user=User.query.get(userId)
+    notebooks=[notebook.to_dict() for notebook in reversed(user.notebooks) if (notebook.shortcut is True)]
+    notes=[note.to_dict() for note in reversed(user.notes) if (note.shortcut is True)]
+    return {'notebooks': notebooks, 'notes': notes}, 200
 
 #Get note details
 @note_routes.route('/note/<int:noteId>')

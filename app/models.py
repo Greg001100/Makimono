@@ -40,7 +40,7 @@ class User(db.Model):
       "email": self.email,
       "picUrl": self.picUrl,
       "notebooks": [notebook.id for notebook in self.notebooks],
-      "notes": [note.id for note in self.notes],
+      "notes": [note.to_dict() for note in self.notes],
       "latest_note": [self.notes[-1].notebook_id, self.notes[-1].id]
     }
 

@@ -5,8 +5,9 @@ import { Button } from "react-bootstrap";
 import { createNote, } from "../actions/notes";
 import Notebooks from "./Notebooks";
 import NewNotebook from "./NewNotebook";
+import Shortcuts from "./Shortcuts";
 
-const SidePanel = () => {
+const SidePanel = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userId = useSelector((state) => state.authentication.user.id);
@@ -15,8 +16,7 @@ const SidePanel = () => {
   const [updateCount, setUpdateCount] = useState(0)
 
   const handleCreateNote = async () => {
-    const createdNote = await dispatch(createNote(userId, notebookId, "placeholder", ""));
-    await console.log(createdNote);
+    const createdNote = await dispatch(createNote(userId, notebookId, "", ""));
     if (createdNote) {
       history.push(`/dashboard/${createdNote.notebook}/${createdNote.id}`);
     }
@@ -25,9 +25,16 @@ const SidePanel = () => {
   return (
     <>
       <p className="sp-text">{fullName}</p>
-      <Notebooks updateCount={updateCount} />
+      {/* <Shortcuts setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={updateCount} /> */}
+      <button onClick={() => props.setAllNotes(true)} className="sp-text">
+        All Notes
+      </button>
+      <Notebooks setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={updateCount} />
+      <br />
       <Button onClick={handleCreateNote}>Create Note</Button>
+      <br />
       <NewNotebook updateCount={updateCount} setUpdateCount={count=> setUpdateCount(count)} />
+      <br />
     </>
   );
 };

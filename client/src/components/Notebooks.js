@@ -14,28 +14,29 @@ const Notebooks = (props) => {
         const awaitList = async () => {
           const list = await dispatch(getNotebooks(userId));
           await setArray(list.data);
-          await console.log(list.data)
         };
         awaitList();
-        console.log(props.updateCount)
       }, [props.updateCount]);
+
+    const handleClick = () => {
+        setTimeout(()=> props.setAllNotes(false), 1000)
+    }
 
     if (notebookArray) {
         return (
             <>
-                <Button onClick={() => console.log(props.updateCount)}>updateCount</Button>
-                <p onClick={() => setOpen(!open)}
+                <button onClick={() => setOpen(!open)}
                 aria-controls="notebook-list"
                 aria-expanded={open}
                 className="sp-text">
                     Notebooks
-                </p>
+                </button>
                 <Collapse in={open}>
                     <div className="sp-text" id='notebook-list'>
                         {notebookArray.map((notebook) => {
                             return (
                                 <p key={notebook.id}>
-                                    <Link className="sp-text" to={`/dashboard/${notebook.id}/${notebook.latest_note}`}>{notebook.title}</Link>
+                                    <Link onClick={handleClick} className="sp-text" to={`/dashboard/${notebook.id}/${notebook.latest_note}`}>{notebook.title}</Link>
                                 </p>
                             )
                         })}

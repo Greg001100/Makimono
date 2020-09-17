@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 load_dotenv()
+from flask import jsonify
 
 from app import app, db
 from app.models import User, Note, Notebook, Tag
