@@ -22,7 +22,7 @@ function SignUp() {
       signUp(firstName, lastName, email, password, csurf)
     );
     if (storeReady) {
-      history.push("/dashboard");
+      history.push(`/dashboard/${storeReady.latest_note[0]}/${storeReady.latest_note[1]}`);
     }
   };
 

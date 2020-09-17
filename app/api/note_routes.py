@@ -61,10 +61,26 @@ def update_note():
     note.title = data["title"]
     note.notebook_id = data["notebook_id"]
     note.content = data["content"]
-    note.shortcut = data["shortcut"]
     db.session.commit()
     return note.to_dict(), 200
+
 #Post new notebook
+@note_routes.route('/notebook/new', methods=['POST'])
+def new_notebook():
+    data=request.json
+    notebook= Notebook(**data)
+    notebook.updated_at=datetime.datetime.now()
+    db.session.add(notebook)
+    db.session.commit()
+    first_note = Note(owner_id = notebook.user_id,
+                      notebook_id= notebook.id,
+                      title="",
+                      content= "",
+                      shortcut = False,
+                      updated_at = datetime.datetime.now())
+    db.session.add(first_note)
+    db.session.commit()
+    return notebook.to_dict(), 200
 
 #Change notebook name/add to shortcut
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import SunEditor, { buttonList } from "suneditor-react";
 import "../../node_modules/suneditor/dist/css/suneditor.min.css";
 import { useDispatch } from "react-redux";
@@ -11,11 +11,13 @@ const NoteEditor = (props) => {
   const { noteId } = useParams();
   const { notebookId } = useParams();
   const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
     const awaitNote = async () => {
       const note = await dispatch(getNote(noteId));
       await setContent(note.content);
+      await setTitle(note.title);
     };
     awaitNote();
   }, [noteId]);
@@ -24,14 +26,20 @@ const NoteEditor = (props) => {
     setContent(changes);
   };
 
+
+  const changeTitle = (e) => setTitle(e.target.value)
+
   const handleSave = async () => {
     const savedNote = await dispatch(
-      updateNote(2, "updated", 1, content, false)
-    );
+      updateNote(noteId, title, notebookId, content)
+      );
+      await props.setSaveCount(props.saveCount + 1)
   };
+
 
   return (
     <>
+      <Form.Control as="textarea" placeholder="Title" value={title} onChange={changeTitle} />
       <SunEditor
         setContents={content}
         onChange={handleChange}

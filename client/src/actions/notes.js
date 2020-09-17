@@ -21,7 +21,7 @@ export const createNote = (owner_id, notebook_id, title, content) => async (disp
       }
 }
 
-export const updateNote = (note_id, title, notebook_id, content, shortcut) => async (dispatch) => {
+export const updateNote = (note_id, title, notebook_id, content) => async (dispatch) => {
     const response = await fetch(`${baseUrl}/note/update`, {
         method: "put",
         credentials: "include",
@@ -31,7 +31,6 @@ export const updateNote = (note_id, title, notebook_id, content, shortcut) => as
           title,
           notebook_id,
           content,
-          shortcut,
         }),
       });
 
@@ -65,6 +64,25 @@ export const getList = (notebookId) => async (dispatch) => {
       return list;
     }
   };
+
+  export const newNotebook = (user_id, title) => async (dispatch) => {
+    const response = await fetch(`${baseUrl}/notebook/new`, {
+        method: "post",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id,
+          title,
+          shortcut: false
+        }),
+      });
+
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.json();
+      }
+}
 
   export const getNotebooks = (userId) => async (dispatch) => {
     const response = await fetch(`${baseUrl}/${userId}/notebooks`, {

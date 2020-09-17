@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, make_response
 from ..models import User, Note, Notebook, Tag, db
 from flask_jwt_extended import jwt_optional, create_access_token, get_jwt_identity, jwt_required, get_raw_jwt
 from flask_wtf.csrf import CSRFProtect, generate_csrf, validate_csrf
+import datetime
 
 user_routes = Blueprint("user", __name__, url_prefix="/user")
 
@@ -24,9 +25,22 @@ def sign_up():
       email=data['email'],
       picUrl=data['picture'],
       )
-# create all notebook, create first notebook, create first note
     user.set_password(data['password'])
     db.session.add(user)
+    db.session.commit()
+    first_notebook = Notebook(user_id = user.id,
+                              title="First Notebook",
+                              shortcut = False,
+                              updated_at = datetime.datetime.now())
+    db.session.add(first_notebook)
+    db.session.commit()
+    first_note = Note(owner_id = user.id,
+                      notebook_id= first_notebook.id,
+                      title="",
+                      content= "",
+                      shortcut = False,
+                      updated_at = datetime.datetime.now())
+    db.session.add(first_note)
     db.session.commit()
     email = user.email
     access_token = create_access_token(identity=email)

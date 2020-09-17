@@ -9,8 +9,7 @@ import SidePanel from "./SidePanel";
 
 
 export default function Dashboard() {
-    const [note, setNote] = useState('')
-    const [noteBook, setNoteBook] = useState('')
+    const [saveCount, setSaveCount] = useState(0)
 
     return (
         <>
@@ -20,10 +19,10 @@ export default function Dashboard() {
                     <Logout />
                 </Col>
                 <Col xs='auto' className="bg-lightgray">
-                    <NoteList />
+                    <NoteList saveCount={saveCount} />
                 </Col>
                 <Col>
-                    <NoteEditor note={note} />
+                    <NoteEditor setSaveCount={count => setSaveCount(count)} saveCount={saveCount} />
                 </Col>
 
             </Container>

@@ -71,7 +71,7 @@ export const signUp = (
       window.localStorage.setItem(CURRENT_USER, JSON.stringify(user));
       dispatch(setToken(token));
       dispatch(setUser(user));
-      return true;
+      return user;
     }
   } catch (err) {
     console.error(err);

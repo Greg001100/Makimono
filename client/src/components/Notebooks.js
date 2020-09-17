@@ -4,7 +4,7 @@ import { NavLink, useHistory, Link } from "react-router-dom";
 import { Button, Collapse } from "react-bootstrap";
 import { createNote, getNotebooks} from "../actions/notes";
 
-const Notebooks = () => {
+const Notebooks = (props) => {
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.authentication.user.id);
     const [notebookArray, setArray] = useState([]);
@@ -17,11 +17,13 @@ const Notebooks = () => {
           await console.log(list.data)
         };
         awaitList();
-      }, []);
+        console.log(props.updateCount)
+      }, [props.updateCount]);
 
     if (notebookArray) {
         return (
             <>
+                <Button onClick={() => console.log(props.updateCount)}>updateCount</Button>
                 <p onClick={() => setOpen(!open)}
                 aria-controls="notebook-list"
                 aria-expanded={open}

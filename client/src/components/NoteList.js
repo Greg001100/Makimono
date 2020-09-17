@@ -16,7 +16,7 @@ const NoteList = (props) => {
       await setArray(list.data);
     };
     awaitList();
-  }, [notebookId, noteId]);
+  }, [notebookId, noteId, props.saveCount]);
 
   if (noteArray) {
       return (
@@ -24,7 +24,7 @@ const NoteList = (props) => {
             {noteArray.map((note) => {
                 return (
                     <p key={note.id}>
-                        <Link to={`/dashboard/${notebookId}/${note.id}`}>{note.title}</Link>
+                        <Link to={`/dashboard/${notebookId}/${note.id}`}>{note.title? note.title : "Untitled"}</Link>
                     </p>
                 )
             })}
