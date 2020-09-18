@@ -27,3 +27,11 @@ button {
 button:focus{
     outline: none;
 }
+
+.star {
+    color: gray;
+}
+
+.star:hover {
+    color: gold;
+}

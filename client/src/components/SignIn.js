@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeAuth, signIn } from "../actions/authentication";
 import { useHistory, Link } from "react-router-dom";
 import DemoButton from "./DemoButton";
+import {Star, StarFill} from 'react-bootstrap-icons'
 
 function SignIn() {
   const [email, setEmail] = useState("");

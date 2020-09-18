@@ -8,8 +8,11 @@ import {
   getList,
   getBookName,
   getAllNotes,
+  removeShortcut,
+  addShortcut,
 } from "../actions/notes";
 import { useParams, Link } from "react-router-dom";
+import { Star, StarFill } from "react-bootstrap-icons";
 
 const NoteList = (props) => {
   const dispatch = useDispatch();
@@ -30,7 +33,17 @@ const NoteList = (props) => {
       await setAllNotesArray(allNotesList.data);
     };
     awaitList();
-  }, [notebookId, noteId, props.saveCount]);
+  }, [notebookId, noteId, props.saveCount, props.updateCount]);
+
+  const toggleShortCut = async (id, shortcut, type) => {
+    if (shortcut) {
+      await dispatch(removeShortcut(id, type))
+      props.setUpdateCount(props.updateCount +1)
+    } else {
+      await dispatch(addShortcut(id, type))
+      props.setUpdateCount(props.updateCount +1)
+    }
+  }
 
   if (props.allNotes) {
     return (
@@ -42,6 +55,7 @@ const NoteList = (props) => {
               <Link to={`/dashboard/${notebookId}/${note.id}`}>
                 {note.title ? note.title : "Untitled"}
               </Link>
+              <button onClick={() => {toggleShortCut(note.id, note.shortcut, "note")}} >{note.shortcut? <StarFill color="gold"/> : <Star className="star"/>}</button>
             </p>
           );
         })}

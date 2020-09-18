@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, Link } from "react-router-dom";
 import { Button, Collapse } from "react-bootstrap";
-import { createNote, getNotebooks} from "../actions/notes";
+import { createNote, getNotebooks, removeShortcut, addShortcut} from "../actions/notes";
+import { Star, StarFill } from "react-bootstrap-icons";
 
 const Notebooks = (props) => {
     const dispatch = useDispatch();
@@ -22,6 +23,16 @@ const Notebooks = (props) => {
         setTimeout(()=> props.setAllNotes(false), 1000)
     }
 
+    const toggleShortCut = async (id, shortcut, type) => {
+        if (shortcut) {
+          await dispatch(removeShortcut(id, type))
+          props.setUpdateCount(props.updateCount +1)
+        } else {
+          await dispatch(addShortcut(id, type))
+          props.setUpdateCount(props.updateCount +1)
+        }
+      }
+
     if (notebookArray) {
         return (
             <>
@@ -37,6 +48,7 @@ const Notebooks = (props) => {
                             return (
                                 <p key={notebook.id}>
                                     <Link onClick={handleClick} className="sp-text" to={`/dashboard/${notebook.id}/${notebook.latest_note}`}>{notebook.title}</Link>
+                                    <button onClick={() => {toggleShortCut(notebook.id, notebook.shortcut, "notebook")}} >{notebook.shortcut? <StarFill color="gold"/> : <Star className="star"/>}</button>
                                 </p>
                             )
                         })}

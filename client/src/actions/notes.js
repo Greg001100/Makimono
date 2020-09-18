@@ -45,6 +45,8 @@ export const updateNote = (note_id, title, notebook_id, content) => async (
   }
 };
 
+
+
 export const getNote = (noteId) => async (dispatch) => {
   const response = await fetch(`${baseUrl}/note/${noteId}`, {
     method: "get",
@@ -133,5 +135,41 @@ export const getNotebooks = (userId) => async (dispatch) => {
   if (response.ok) {
     const list = await response.json();
     return list;
+  }
+};
+
+export const addShortcut = (id, type) => async (dispatch) => {
+  const response = await fetch(`${baseUrl}/shortcut/add`, {
+    method: "put",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id,
+      type
+    }),
+  });
+
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response.json();
+  }
+};
+
+export const removeShortcut = (id, type) => async (dispatch) => {
+  const response = await fetch(`${baseUrl}/shortcut/remove`, {
+    method: "put",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id,
+      type
+    }),
+  });
+
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response.json();
   }
 };

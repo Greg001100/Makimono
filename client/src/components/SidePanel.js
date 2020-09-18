@@ -13,7 +13,6 @@ const SidePanel = (props) => {
   const userId = useSelector((state) => state.authentication.user.id);
   const fullName = useSelector((state) => state.authentication.user.full_name);
   const {notebookId} = useParams();
-  const [updateCount, setUpdateCount] = useState(0)
 
   const handleCreateNote = async () => {
     const createdNote = await dispatch(createNote(userId, notebookId, "", ""));
@@ -25,15 +24,17 @@ const SidePanel = (props) => {
   return (
     <>
       <p className="sp-text">{fullName}</p>
-      <Shortcuts setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={updateCount} />
+      <Shortcuts setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={props.updateCount} />
+      <br/>
       <button onClick={() => props.setAllNotes(true)} className="sp-text">
         All Notes
       </button>
-      <Notebooks setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={updateCount} />
+      <br/>
+      <Notebooks setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={props.updateCount} setUpdateCount={count=> props.setUpdateCount(count)} />
       <br />
       <Button onClick={handleCreateNote}>Create Note</Button>
       <br />
-      <NewNotebook updateCount={updateCount} setUpdateCount={count=> setUpdateCount(count)} />
+      <NewNotebook updateCount={props.updateCount} setUpdateCount={count=> props.setUpdateCount(count)} />
       <br />
     </>
   );

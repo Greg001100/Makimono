@@ -97,6 +97,42 @@ def new_notebook():
     db.session.commit()
     return notebook.to_dict(), 200
 
-#Change notebook name/add to shortcut
+#add shortcut
+@note_routes.route('/shortcut/add', methods=['PUT'])
+def add_shortcut():
+    data=request.json
+    if data['type'] == 'note':
+        note=Note.query.get(data['id'])
+        db.session.add(note)
+        note.shortcut=True
+        db.session.commit()
+        return {'msg': 'shortcut added'}, 200
+    elif data['type'] =='notebook':
+        notebook=Notebook.query.get(data['id'])
+        db.session.add(notebook)
+        notebook.shortcut=True
+        db.session.commit()
+        return {'msg': 'shortcut added'}, 200
+    else:
+        return {'msg': 'invalid shortcut type'}, 400
+
+#remove shortcut
+@note_routes.route('/shortcut/remove', methods=['PUT'])
+def remove_shortcut():
+    data=request.json
+    if data['type'] == 'note':
+        note=Note.query.get(data['id'])
+        db.session.add(note)
+        note.shortcut=False
+        db.session.commit()
+        return {'msg': 'shortcut added'}, 200
+    elif data['type'] =='notebook':
+        notebook=Notebook.query.get(data['id'])
+        db.session.add(notebook)
+        notebook.shortcut=False
+        db.session.commit()
+        return {'msg': 'shortcut added'}, 200
+    else:
+        return {'msg': 'invalid shortcut type'}, 400
 
 #create a tag
