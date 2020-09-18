@@ -22,24 +22,31 @@ const NoteEditor = (props) => {
     awaitNote();
   }, [noteId]);
 
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      const savedNote = await dispatch(
+        updateNote(noteId, title, notebookId, content)
+      );
+      await props.setSaveCount(props.saveCount + 1);
+      await console.log("saved");
+    }, 3000);
+    return () => clearTimeout(timer)
+  }, [content, title]);
+
   const handleChange = (changes) => {
     setContent(changes);
   };
 
-
-  const changeTitle = (e) => setTitle(e.target.value)
-
-  const handleSave = async () => {
-    const savedNote = await dispatch(
-      updateNote(noteId, title, notebookId, content)
-      );
-      await props.setSaveCount(props.saveCount + 1)
-  };
-
+  const changeTitle = (e) => setTitle(e.target.value);
 
   return (
     <>
-      <Form.Control as="textarea" placeholder="Title" value={title} onChange={changeTitle} />
+      <Form.Control
+        as="textarea"
+        placeholder="Title"
+        value={title}
+        onChange={changeTitle}
+      />
       <SunEditor
         setContents={content}
         onChange={handleChange}
@@ -65,7 +72,6 @@ const NoteEditor = (props) => {
           ],
         }}
       />
-      <Button onClick={handleSave}>save</Button>
     </>
   );
 };
