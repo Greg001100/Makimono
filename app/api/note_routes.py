@@ -17,7 +17,7 @@ def get_all_notes(userId):
 def get_notebooks(userId):
     user = User.query.get(userId)
     notebooks = user.notebooks
-    data=[notebook.to_dict() for notebook in notebooks]
+    data=[notebook.to_dict() for notebook in reversed(notebooks)]
     return {'data': data}, 200
 
 #Get Notebook name

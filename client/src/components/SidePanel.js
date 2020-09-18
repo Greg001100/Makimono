@@ -25,7 +25,7 @@ const SidePanel = (props) => {
   return (
     <>
       <p className="sp-text">{fullName}</p>
-      {/* <Shortcuts setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={updateCount} /> */}
+      <Shortcuts setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={updateCount} />
       <button onClick={() => props.setAllNotes(true)} className="sp-text">
         All Notes
       </button>
