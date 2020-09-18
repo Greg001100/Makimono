@@ -173,3 +173,55 @@ export const removeShortcut = (id, type) => async (dispatch) => {
     return response.json();
   }
 };
+
+export const renameNotebook = (title, notebook_id) => async (dispatch) => {
+  const response = await fetch(`${baseUrl}/notebook/rename`, {
+    method: "put",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title,
+      notebook_id
+    }),
+  });
+
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response.json();
+  }
+};
+
+export const deleteNotebook = (notebook_id) => async (dispatch) => {
+  const response = await fetch(`${baseUrl}/notebook/delete`, {
+    method: "delete",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      notebook_id
+    }),
+  });
+
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response.json();
+  }
+};
+
+export const deleteNote = (note_id) => async (dispatch) => {
+  const response = await fetch(`${baseUrl}/note/delete`, {
+    method: "delete",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      note_id
+    }),
+  });
+
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response.json();
+  }
+};

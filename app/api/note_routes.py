@@ -135,4 +135,36 @@ def remove_shortcut():
     else:
         return {'msg': 'invalid shortcut type'}, 400
 
-#create a tag
+#rename notebook
+@note_routes.route('/notebook/rename', methods=['PUT'])
+def rename_notebook():
+    data= request.json
+    notebook=Notebook.query.get(data['notebook_id'])
+    db.session.add(notebook)
+    notebook.title = data['title']
+    db.session.commit()
+    return {'msg':'rename successful'}, 200
+
+#delete notebook
+@note_routes.route('/notebook/delete', methods=['DELETE'])
+def delete_notebook():
+    data= request.json
+    notebook=Notebook.query.get(data['notebook_id'])
+    db.session.add(notebook)
+    for note in notebook.notes:
+        db.session.add(note)
+        db.session.delete(note)
+        db.session.commit()
+    db.session.delete(notebook)
+    db.session.commit()
+    return {'msg':'delete successful'}, 200
+
+#delete note
+@note_routes.route('/note/delete', methods=['DELETE'])
+def delete_note():
+    data= request.json
+    note=Note.query.get(data['note_id'])
+    db.session.add(note)
+    db.session.delete(note)
+    db.session.commit()
+    return {'msg':'delete successful'}, 200

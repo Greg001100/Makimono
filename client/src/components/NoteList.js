@@ -1,10 +1,6 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Button } from "react-bootstrap";
+import React, { useState, useEffect, } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createNote,
-  updateNote,
-  getNote,
   getList,
   getBookName,
   getAllNotes,
@@ -13,6 +9,7 @@ import {
 } from "../actions/notes";
 import { useParams, Link } from "react-router-dom";
 import { Star, StarFill } from "react-bootstrap-icons";
+import DeleteNote from "./DeleteNote";
 
 const NoteList = (props) => {
   const dispatch = useDispatch();
@@ -37,13 +34,13 @@ const NoteList = (props) => {
 
   const toggleShortCut = async (id, shortcut, type) => {
     if (shortcut) {
-      await dispatch(removeShortcut(id, type))
-      props.setUpdateCount(props.updateCount +1)
+      await dispatch(removeShortcut(id, type));
+      props.setUpdateCount(props.updateCount + 1);
     } else {
-      await dispatch(addShortcut(id, type))
-      props.setUpdateCount(props.updateCount +1)
+      await dispatch(addShortcut(id, type));
+      props.setUpdateCount(props.updateCount + 1);
     }
-  }
+  };
 
   if (props.allNotes) {
     return (
@@ -55,7 +52,17 @@ const NoteList = (props) => {
               <Link to={`/dashboard/${notebookId}/${note.id}`}>
                 {note.title ? note.title : "Untitled"}
               </Link>
-              <button onClick={() => {toggleShortCut(note.id, note.shortcut, "note")}} >{note.shortcut? <StarFill color="gold"/> : <Star className="star"/>}</button>
+              <button
+                onClick={() => {
+                  toggleShortCut(note.id, note.shortcut, "note");
+                }}
+              >
+                {note.shortcut ? (
+                  <StarFill color="gold" />
+                ) : (
+                  <Star size=".75em" className="star" />
+                )}
+              </button>
             </p>
           );
         })}
@@ -71,6 +78,23 @@ const NoteList = (props) => {
               <Link to={`/dashboard/${notebookId}/${note.id}`}>
                 {note.title ? note.title : "Untitled"}
               </Link>
+              <button
+                onClick={() => {
+                  toggleShortCut(note.id, note.shortcut, "note");
+                }}
+              >
+                {note.shortcut ? (
+                  <StarFill color="gold" />
+                ) : (
+                  <Star size=".75em" className="star" />
+                )}
+              </button>
+              {noteBookArray.length > 1 ? (
+                <DeleteNote
+                  noteId={note.id}
+                  setUpdateCount={(count) => props.setUpdateCount(count)}
+                />
+              ) : null}
             </p>
           );
         })}

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, Link } from "react-router-dom";
-import { Button, Collapse } from "react-bootstrap";
+import { Button, Collapse, Popover, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { createNote, getNotebooks, removeShortcut, addShortcut} from "../actions/notes";
-import { Star, StarFill } from "react-bootstrap-icons";
+import { Star, StarFill, ThreeDots } from "react-bootstrap-icons";
+import OptionsPop from "./OptionsPop";
 
 const Notebooks = (props) => {
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Notebooks = (props) => {
         }
       }
 
+
     if (notebookArray) {
         return (
             <>
@@ -49,6 +51,7 @@ const Notebooks = (props) => {
                                 <p key={notebook.id}>
                                     <Link onClick={handleClick} className="sp-text" to={`/dashboard/${notebook.id}/${notebook.latest_note}`}>{notebook.title}</Link>
                                     <button onClick={() => {toggleShortCut(notebook.id, notebook.shortcut, "notebook")}} >{notebook.shortcut? <StarFill color="gold"/> : <Star className="star"/>}</button>
+                                    <OptionsPop notebookId = {notebook.id} setUpdateCount={count=> props.setUpdateCount(count)} />
                                 </p>
                             )
                         })}
