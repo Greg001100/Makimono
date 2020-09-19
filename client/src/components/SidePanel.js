@@ -30,7 +30,7 @@ const SidePanel = (props) => {
         All Notes
       </button>
       <br/>
-      <Notebooks setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={props.updateCount} setUpdateCount={count=> props.setUpdateCount(count)} />
+      <Notebooks notebookArray={props.notebookArray} setAllNotes={(boolean)=> props.setAllNotes(boolean)} updateCount={props.updateCount} setUpdateCount={count=> props.setUpdateCount(count)} />
       <br />
       <Button onClick={handleCreateNote}>Create Note</Button>
       <br />

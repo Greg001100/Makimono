@@ -86,6 +86,7 @@ class Notebook(db.Model):
       "id": self.id,
       "title": self.title,
       "shortcut": self.shortcut,
+      "notes": [note.id for note in self.notes],
       "latest_note": self.notes[-1].id
     }
 

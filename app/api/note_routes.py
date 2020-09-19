@@ -145,6 +145,16 @@ def rename_notebook():
     db.session.commit()
     return {'msg':'rename successful'}, 200
 
+#change notebooks
+@note_routes.route('/notebook/change', methods=['PUT'])
+def change_notebook():
+    data= request.json
+    note=Note.query.get(data['noteId'])
+    db.session.add(note)
+    note.notebook_id=data['notebook_id']
+    db.session.commit()
+    return note.to_dict(), 200
+
 #delete notebook
 @note_routes.route('/notebook/delete', methods=['DELETE'])
 def delete_notebook():

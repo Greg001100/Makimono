@@ -13,7 +13,7 @@
 }
 
 .sp-text {
-    color: rgb(192, 192, 192);
+    color: rgb(156, 156, 156);
 }
 
 button {
@@ -34,4 +34,23 @@ button:focus{
 
 .star:hover {
     color: gold;
+}
+
+.title {
+    font-size: 3em;
+}
+
+.hide_journal {
+    display:none;
+}
+
+.journal:hover + .hide_journal, .hide_journal:hover {
+    display:block
+}
+
+.px250 {
+    max-width: 250px;
+}
+.px300 {
+    max-width: 300px;
 }

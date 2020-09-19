@@ -3,7 +3,6 @@ import {Button, Modal, Form} from "react-bootstrap"
 import { newNotebook } from "../actions/notes";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory} from "react-router-dom";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 const NewNotebook = (props) => {
   const [show, setShow] = useState(false);
@@ -33,14 +32,14 @@ const NewNotebook = (props) => {
         New Notebook
       </Button>
 
-      <Modal show={show} onHide={handleClose} animation={false}>
+      <Modal show={show} centered onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>Add a new Notebook!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form onSubmit={handleSubmit}>
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Enter a name for your notebook" onChange={updateNotebookName} />
+                <Form.Control maxLength={50} type="text" placeholder="Enter a name for your notebook" onChange={updateNotebookName} />
             </Form>
         </Modal.Body>
         <Modal.Footer>

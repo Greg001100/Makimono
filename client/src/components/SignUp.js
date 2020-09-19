@@ -38,6 +38,7 @@ function SignUp() {
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
+                  maxLength={50}
                   placeholder="First Name"
                   value={firstName}
                   onChange={e => setFirstName(e.target.value)}
@@ -48,6 +49,7 @@ function SignUp() {
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="text"
+                  maxLength={50}
                   placeholder="Last Name"
                   value={lastName}
                   onChange={e => setLastName(e.target.value)}
@@ -61,6 +63,7 @@ function SignUp() {
               <Form.Control
                 type="email"
                 value={email}
+                maxLength={255}
                 placeholder="Enter Email"
                 onChange={(e) => setEmail(e.target.value)}
               />

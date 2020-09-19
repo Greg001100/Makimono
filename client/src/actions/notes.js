@@ -192,6 +192,24 @@ export const renameNotebook = (title, notebook_id) => async (dispatch) => {
   }
 };
 
+export const changeBook = (noteId, notebook_id) => async (dispatch) => {
+  const response = await fetch(`${baseUrl}/notebook/change`, {
+    method: "put",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      noteId,
+      notebook_id
+    }),
+  });
+
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response.json();
+  }
+};
+
 export const deleteNotebook = (notebook_id) => async (dispatch) => {
   const response = await fetch(`${baseUrl}/notebook/delete`, {
     method: "delete",

@@ -49,7 +49,7 @@ const NoteList = (props) => {
         {allNotesArray.map((note) => {
           return (
             <p key={note.id}>
-              <Link to={`/dashboard/${notebookId}/${note.id}`}>
+              <Link to={`/dashboard/${note.notebook}/${note.id}`}>
                 {note.title ? note.title : "Untitled"}
               </Link>
               <button
