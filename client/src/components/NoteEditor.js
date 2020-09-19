@@ -5,7 +5,7 @@ import "../../node_modules/suneditor/dist/css/suneditor.min.css";
 import { useDispatch } from "react-redux";
 import { createNote, updateNote, getNote, getBookName } from "../actions/notes";
 import { useParams } from "react-router-dom";
-import { ArrowRightCircleFill, Journals } from "react-bootstrap-icons";
+import { ArrowRightCircleFill, Check2, Journals } from "react-bootstrap-icons";
 import ChangeNotebook from "./ChangeNotebook";
 
 const NoteEditor = (props) => {
@@ -15,6 +15,7 @@ const NoteEditor = (props) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [bookName, setBookName] = useState("");
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const awaitNote = async () => {
@@ -28,12 +29,14 @@ const NoteEditor = (props) => {
   }, [noteId]);
 
   useEffect(() => {
+    setSaving(true);
     const timer = setTimeout(async () => {
       const savedNote = await dispatch(
         updateNote(noteId, title, notebookId, content)
       );
       await props.setSaveCount(props.saveCount + 1);
       await console.log("saved");
+      await setSaving(false);
     }, 3000);
     return () => clearTimeout(timer);
   }, [content, title]);
@@ -46,16 +49,25 @@ const NoteEditor = (props) => {
 
   return (
     <>
-      <div className="sp-text d-flex align-items-center mt-2 mb-0 pb-0 journal">
-        <Journals />
-        <p className="my-0 py-0 px-1 journal">{bookName}</p>
-        <div className="sp-text align-items-center hide_journal px-1">
-          <ArrowRightCircleFill />{" "}
-          <ChangeNotebook
-            updateCount={props.updateCount}
-            setUpdateCount={(count) => props.setUpdateCount(count)}
-          />
+      <div className="sp-text d-flex align-items-center mt-2 mb-0 pb-0 justify-content-between">
+        <div className="d-flex align-items-center mt-2 mb-0 pb-0">
+          <Journals />
+          <p className="my-0 py-0 px-1 journal">{bookName}</p>
+          <div className="sp-text align-items-center hide_journal px-1">
+            <ArrowRightCircleFill />{" "}
+            <ChangeNotebook
+              updateCount={props.updateCount}
+              setUpdateCount={(count) => props.setUpdateCount(count)}
+            />
+          </div>
         </div>
+        {saving ? (
+          <div class="spinner-border spinner-border-sm text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        ) : (
+          <p className='my-0'><Check2 size='1.5em' color="blue"/> saved</p>
+        )}
       </div>
       <Form.Control
         as="input"
