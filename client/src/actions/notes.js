@@ -45,8 +45,6 @@ export const updateNote = (note_id, title, notebook_id, content) => async (
   }
 };
 
-
-
 export const getNote = (noteId) => async (dispatch) => {
   const response = await fetch(`${baseUrl}/note/${noteId}`, {
     method: "get",

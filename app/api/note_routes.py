@@ -9,8 +9,9 @@ note_routes = Blueprint("notes", __name__, url_prefix="")
 @note_routes.route('/<userId>/notes/all')
 def get_all_notes(userId):
     user=User.query.get(userId)
-    data=[note.to_dict() for note in reversed(user.notes)]
-    return {'data': data}, 200
+    data=[note.to_dict() for note in (user.notes)]
+    sorter=sorted(data, key=lambda i: i['updatedAt'], reverse=True)
+    return {'data': sorter}, 200
 
 #Get Notebook List
 @note_routes.route('/<userId>/notebooks')
@@ -31,7 +32,8 @@ def get_book_name(notebookId):
 def get_associated_notes(notebookId):
     notebook= Notebook.query.get(notebookId)
     data = [note.to_dict() for note in reversed(notebook.notes)]
-    return {'data': data}, 200
+    sorter=sorted(data, key=lambda i: i['updatedAt'], reverse=True)
+    return {'data': sorter}, 200
 
 #Get all user shortcuts
 @note_routes.route('/<userId>/shortcuts')

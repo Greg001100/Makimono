@@ -32,6 +32,10 @@ button:focus{
     color: gray;
 }
 
+.delete {
+    color: gray;
+}
+
 .star:hover {
     color: gold;
 }
@@ -50,7 +54,32 @@ button:focus{
 
 .px250 {
     max-width: 250px;
+    min-width: 180px;
 }
 .px300 {
     max-width: 300px;
+}
+
+.content_card {
+    max-height: 150px;
+    min-height: 150px;
+}
+
+.small_text {
+    font-size: .75em;
+}
+
+.special_a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.special_a:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.no_padding {
+    padding-left: 7px;
+    padding-right: 7px;
 }

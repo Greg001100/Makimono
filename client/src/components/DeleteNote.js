@@ -20,7 +20,7 @@ const DeleteNote = (props) => {
   return (
     <>
       <button onClick={() => handleShowDelete()}>
-        <XCircle />
+        <XCircle className='delete mx-1' size='.75em'/>
       </button>
 
       <Modal show={showDelete} centered onHide={handleCloseDelete}>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logout from "./Logout";
-import { Container, Col } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 
 import NoteEditor from "./NoteEditor";
 import NoteList from "./NoteList";
@@ -14,31 +14,34 @@ export default function Dashboard() {
 
   return (
     <>
-      <Container fluid className="d-flex vh-100 vw-100 px-0">
-        <Col xs={2} className="bg-darker px250">
-          <SidePanel
-            setAllNotes={(boolean) => setAllNotes(boolean)}
-            updateCount={updateCount}
-            setUpdateCount={(count) => setUpdateCount(count)}
-          />
-          <Logout />
-        </Col>
-        <Col xs={3} className="bg-lightgray px300">
-          <NoteList
-            saveCount={saveCount}
-            allNotes={allNotes}
-            updateCount={updateCount}
-            setUpdateCount={(count) => setUpdateCount(count)}
-          />
-        </Col>
-        <Col>
-          <NoteEditor
-            setSaveCount={(count) => setSaveCount(count)}
-            saveCount={saveCount}
-            updateCount={updateCount}
-            setUpdateCount={(count) => setUpdateCount(count)}
-          />
-        </Col>
+      <Container fluid className="d-flex vh-100 vw-100 fullscreen">
+        <Row className='flex-grow-1'>
+          <Col xs={3} className="bg-darker px250">
+            <SidePanel
+              setAllNotes={(boolean) => setAllNotes(boolean)}
+              updateCount={updateCount}
+              setUpdateCount={(count) => setUpdateCount(count)}
+            />
+            <Logout />
+          </Col>
+          <Col xs={3} className="bg-lightgray h-100 px300 border d-flex flex-column mx-0 px-0 overflow-auto">
+            <NoteList
+              saveCount={saveCount}
+              allNotes={allNotes}
+              updateCount={updateCount}
+              setUpdateCount={(count) => setUpdateCount(count)}
+            />
+          </Col>
+          <Col className='p-0 overflow-hidden'>
+            <NoteEditor
+              setSaveCount={(count) => setSaveCount(count)}
+              saveCount={saveCount}
+              updateCount={updateCount}
+              setUpdateCount={(count) => setUpdateCount(count)}
+              className='mx-0 px-0 overflow-hidden'
+            />
+          </Col>
+        </Row>
       </Container>
     </>
   );

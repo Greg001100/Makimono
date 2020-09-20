@@ -85,7 +85,7 @@ const ChangeNotebook = (props) => {
                     {notebookArray.map((notebook) => {
                       return (
                         <Form.Check
-                          id={notebook.id}
+                          key={notebook.id}
                           type="radio"
                           label={notebook.title}
                           onClick={() => setNewBook(notebook.id)}

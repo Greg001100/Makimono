@@ -124,7 +124,8 @@ class Note(db.Model):
       "content": self.content,
       "owner": self.owner.id,
       "tags": self.tags,
-      "shortcut": self.shortcut
+      "shortcut": self.shortcut,
+      "updatedAt": self.updated_at
     }
 
 class Tag(db.Model):
