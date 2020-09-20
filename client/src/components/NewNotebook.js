@@ -28,8 +28,8 @@ const NewNotebook = (props) => {
 
   return (
     <>
-      <Button variant="secondary" onClick={handleShow}>
-        New Notebook
+      <Button className='my-3' block size='sm' onClick={handleShow}>
+        + New Notebook
       </Button>
 
       <Modal show={show} centered onHide={handleClose} animation={false}>

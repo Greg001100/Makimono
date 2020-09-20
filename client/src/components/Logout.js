@@ -9,7 +9,7 @@ const Logout = () => {
 
     return (
         <>
-            <Button variant="secondary" onClick={handleClick}>Logout</Button>
+            <button className='justify-self-end align-self-start sp-text my-3' onClick={handleClick}>Logout</button>
         </>
     )
 }

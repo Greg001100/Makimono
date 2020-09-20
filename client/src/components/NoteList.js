@@ -8,7 +8,7 @@ import {
   addShortcut,
 } from "../actions/notes";
 import { useParams, Link } from "react-router-dom";
-import { Star, StarFill } from "react-bootstrap-icons";
+import { Star, StarFill, JournalText, Journals } from "react-bootstrap-icons";
 import DeleteNote from "./DeleteNote";
 import { Card } from "react-bootstrap";
 
@@ -50,7 +50,7 @@ const NoteList = (props) => {
     console.log(allNotesArray)
     return (
       <div className='overflow-auto'>
-        <h3 className="d-flex py-2 my-2 justify-content-center">All Notes</h3>
+        <h3 className="d-flex py-2 my-2 justify-content-center"> <JournalText className='mx-2'/>All Notes</h3>
         {allNotesArray.map((note) => {
           return (
             <Link
@@ -100,7 +100,7 @@ const NoteList = (props) => {
     console.log(noteBookArray)
     return (
       <>
-        <h3 className="d-flex py-2 my-2 justify-content-center">{bookName}</h3>
+        <h3 className="d-flex py-2 my-2 justify-content-center"><Journals className='mx-2'/>{bookName}</h3>
         {noteBookArray.map((note) => {
           return (
             <Link

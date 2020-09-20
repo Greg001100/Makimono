@@ -16,12 +16,14 @@ export default function Dashboard() {
     <>
       <Container fluid className="d-flex vh-100 vw-100 fullscreen">
         <Row className='flex-grow-1'>
-          <Col xs={3} className="bg-darker px250">
-            <SidePanel
-              setAllNotes={(boolean) => setAllNotes(boolean)}
-              updateCount={updateCount}
-              setUpdateCount={(count) => setUpdateCount(count)}
-            />
+          <Col xs={3} className="bg-darker d-flex flex-column justify-content-between px250">
+            <div>
+              <SidePanel
+                setAllNotes={(boolean) => setAllNotes(boolean)}
+                updateCount={updateCount}
+                setUpdateCount={(count) => setUpdateCount(count)}
+              />
+            </div>
             <Logout />
           </Col>
           <Col xs={3} className="bg-lightgray h-100 px300 border d-flex flex-column mx-0 px-0 overflow-auto">

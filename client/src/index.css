@@ -16,6 +16,11 @@
     color: rgb(156, 156, 156);
 }
 
+.large-text {
+    font-size: 1.75em;
+    font-weight: bold;
+}
+
 button {
     background:none;
     border:none;

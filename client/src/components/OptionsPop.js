@@ -53,7 +53,7 @@ const OptionsPop = (props) => {
         placement="right"
         overlay={popover}
       >
-        <ThreeDots />
+        <ThreeDots className='mx-2'/>
       </OverlayTrigger>
 
       <Modal show={showRename} centered onHide={handleCloseRename}>
