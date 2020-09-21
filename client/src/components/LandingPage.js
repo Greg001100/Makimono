@@ -1,27 +1,77 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {Button, Container, Col, Row} from 'react-bootstrap'
+import {
+  Button,
+  Container,
+  Col,
+  Row,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Form,
+  FormControl,
+} from "react-bootstrap";
+import { Lightning } from "react-bootstrap-icons";
+import SignUp from "./SignUp";
 
 function LandingPage() {
-
   return (
-    <Container>
-      <Row className="text-center justify-content-center">
-          <h1>Makimono</h1>
-      </Row>
-      <Row className="text-center justify-content-center">
-        <Col></Col>
-        <Col><p>Organize your thoughts.</p></Col>
-        <Col></Col>
-      </Row>
-      <Row className="justify-content-center">
-          <nav className="d-flex justify-content-center">
-            <Link to='signup'><Button className="mx-3">Sign up</Button></Link>
-            <Link to='/signin'><Button>Login</Button></Link>
+    <>
+      <Navbar sticky='top' className='border justify-content-between' bg="light" expand="lg">
+        <Navbar.Brand className='ml-5 d-flex align-items-center'>
+          <img
+            alt=""
+            src="/favicon.ico"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />
+          <h1 className='mx-2'>Makimono</h1>
+        </Navbar.Brand>
+        <nav className="d-flex justify-content-center">
+            <Link to="/signin">
+              <Button>Login</Button>
+            </Link>
           </nav>
-      </Row>
-    </Container>
-
+      </Navbar>
+      <Container fluid>
+        <Row className="text-center my-5 align-items-center">
+          <Col>
+            <h1>Simplify your life</h1>
+            <h4>Makimono is the home for everything you need to remember, and everything you want to achieve.</h4>
+          </Col>
+          <Col>
+            <img width='100%' height='auto'  src='/images/multi_device_meeting_note@2x__en.png'/>
+          </Col>
+        </Row>
+        <Row className='d-flex flex-column bg-light text-center'>
+          <Col>
+            <Lightning className='text-primary lightning my-5' />
+            <h2>Focus on what matters most</h2>
+          </Col>
+          <Row className='my-5'>
+            <Col className='mx-3'>
+              <p className='sp-text bigger-text'>Manage everything from big projects to personal moments.</p>
+            </Col>
+            <Col>
+              <p className='sp-text bigger-text'>Capture ideas and inspiration in notes, video, and pictures.</p>
+            </Col>
+            <Col className='mx-3'>
+              <p className='sp-text bigger-text'>Never lose track of your tasks and deadlines.</p>
+            </Col>
+          </Row>
+        </Row>
+        <Row className='bg-primary text-center py-5 align-items-center'>
+          <Col>
+            <h1 className='text-light'>Sign up for Makimono Today</h1>
+            <p className='text-light bigger-text'>Capture ideas and inspiration from anywhere and manage tasks with ease.</p>
+          </Col>
+          <Col>
+            <SignUp />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 

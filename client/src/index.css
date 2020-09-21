@@ -12,6 +12,10 @@
     background-color: rgb(245, 245, 245);
 }
 
+.bg-lightblue {
+    background-color: rgb(140, 195, 247);
+}
+
 .sp-text {
     color: rgb(156, 156, 156);
 }
@@ -65,6 +69,10 @@ button:focus{
     max-width: 300px;
 }
 
+.px400 {
+    max-width: 400px;
+}
+
 .content_card {
     max-height: 150px;
     min-height: 150px;
@@ -87,4 +95,12 @@ button:focus{
 .no_padding {
     padding-left: 7px;
     padding-right: 7px;
+}
+
+.lightning {
+    font-size: 120px;
+}
+
+.bigger-text {
+    font-size: 1.3em;
 }

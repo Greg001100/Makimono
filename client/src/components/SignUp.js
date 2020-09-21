@@ -27,15 +27,13 @@ function SignUp() {
   };
 
   return (
-    <Container>
+    <Container className='px-5 px400'>
       <Row>
-        <Col></Col>
         <Col sm>
         {valErrors? <Alert variant="danger">{valErrors.msg}</Alert> : null}
           <Form onSubmit={handleSubmit}>
-            <Form.Row>
+            <Form.Row className=''>
               <Form.Group as={Col} controlId="formGridFirstName">
-                <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
                   maxLength={50}
@@ -46,7 +44,6 @@ function SignUp() {
                 />
               </Form.Group>
               <Form.Group as={Col} controlId="formGridLastName">
-                <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="text"
                   maxLength={50}
@@ -57,9 +54,7 @@ function SignUp() {
                 />
               </Form.Group>
             </Form.Row>
-
-            <Form.Group controlId="formGridEmail">
-              <Form.Label>Email</Form.Label>
+            <Form.Group className='my-3' controlId="formGridEmail">
               <Form.Control
                 type="email"
                 value={email}
@@ -68,8 +63,7 @@ function SignUp() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
+            <Form.Group className='my-4' controlId="formBasicPassword">
               <Form.Control
                 type="password"
                 placeholder="Enter Password"
@@ -83,14 +77,14 @@ function SignUp() {
                 </p>
               ) : null}
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
+            <p className='text-light'>By clicking below, I agree to the Terms of Service and Privacy Policy.</p>
+            <Button block className='text-primary font-weight-bolder' variant="light" type="submit">
+              SIGN UP
             </Button>
           </Form>
           <br></br>
           <Link to="/signin">Already have an account?</Link>
         </Col>
-        <Col></Col>
       </Row>
     </Container>
   );

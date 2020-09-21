@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeAuth, signIn } from "../actions/authentication";
 import { useHistory, Link } from "react-router-dom";
 import DemoButton from "./DemoButton";
-import {Star, StarFill} from 'react-bootstrap-icons'
+import { Star, StarFill } from "react-bootstrap-icons";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -28,14 +28,30 @@ function SignIn() {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col></Col>
-        <Col sm>
+    <Container
+      fluid
+      className="bg-lightblue d-flex align-items-center justify-content-center vh-100"
+    >
+      <Row className="bg-white shadow rounded">
+        <Col
+          sm
+          className="p-5 d-flex flex-column align-items-center justify-content-center"
+        >
+          <img
+            alt=""
+            src="/favicon.ico"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />
+          <h1>Makimono</h1>
+          <p>Remember everything important</p>
           {valErrors ? <Alert variant="danger">{valErrors.msg}</Alert> : null}
-          <Form onSubmit={handleSubmit}>
+          <Form
+            onSubmit={handleSubmit}
+            className="d-flex flex-column align-items-center justify-content-center"
+          >
             <Form.Group controlId="formGridEmail">
-              <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
                 value={email}
@@ -44,7 +60,6 @@ function SignIn() {
               />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Enter Password"
@@ -53,7 +68,11 @@ function SignIn() {
                 required
               />
             </Form.Group>
-            <Button variant="primary" type="submit" className="signIn">
+            <Button
+              variant="primary"
+              type="submit"
+              className="my-2 signIn align-self-center"
+            >
               Submit
             </Button>
             <DemoButton
@@ -66,7 +85,6 @@ function SignIn() {
           <br></br>
           <Link to="/signup">Don't have an account?</Link>
         </Col>
-        <Col></Col>
       </Row>
     </Container>
   );
