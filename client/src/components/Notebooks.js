@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Collapse } from "react-bootstrap";
+import { getNotebooks, removeShortcut, addShortcut } from "../actions/notes";
 import {
-  Button,
-  Collapse,
-  Popover,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
-import {
-  createNote,
-  getNotebooks,
-  removeShortcut,
-  addShortcut,
-} from "../actions/notes";
-import { Journals, Star, StarFill, ThreeDots, CaretDownFill, CaretRightFill, } from "react-bootstrap-icons";
+  Journals,
+  Star,
+  StarFill,
+  CaretDownFill,
+  CaretRightFill,
+} from "react-bootstrap-icons";
 import OptionsPop from "./OptionsPop";
 
 const Notebooks = (props) => {
@@ -53,7 +48,7 @@ const Notebooks = (props) => {
 
   if (notebookArray) {
     return (
-      <div className='my-2'>
+      <div className="my-2">
         <button
           onClick={handleOpen}
           aria-controls="notebook-list"
@@ -68,7 +63,7 @@ const Notebooks = (props) => {
           <div className="sp-text" id="notebook-list">
             {notebookArray.map((notebook) => {
               return (
-                <p clasName='my-0 py-0' key={notebook.id}>
+                <p className="my-0 py-0" key={notebook.id}>
                   <button
                     onClick={() => {
                       toggleShortCut(
@@ -79,7 +74,7 @@ const Notebooks = (props) => {
                     }}
                   >
                     {notebook.shortcut ? (
-                      <StarFill className='mx-2' color="gold" />
+                      <StarFill className="mx-2" color="gold" />
                     ) : (
                       <Star className=" mx-2 star" />
                     )}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, Link } from "react-router-dom";
-import { Button, Collapse } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Collapse } from "react-bootstrap";
 import { getShortcuts } from "../actions/notes";
 import { CaretDownFill, CaretRightFill, StarFill, Journals, JournalText } from "react-bootstrap-icons";
 
@@ -48,7 +48,7 @@ const Shortcuts = (props) => {
           <div className="sp-text" id="shortcut-list">
             {notebookArray.map((notebook) => {
               return (
-                <p clasName='my-0 py-0' key={notebook.id}>
+                <p className='my-0 py-0' key={notebook.id}>
                   <Journals className='mx-2'/>
                   <Link
                     onClick={handleClick}

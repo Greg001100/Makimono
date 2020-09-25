@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, Link } from "react-router-dom";
+import React, { useState} from "react";
+import { useDispatch} from "react-redux";
 import { Button, Popover, OverlayTrigger, Modal, Form } from "react-bootstrap";
 import { renameNotebook, deleteNotebook } from "../actions/notes";
 import { ThreeDots } from "react-bootstrap-icons";

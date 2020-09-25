@@ -5,7 +5,6 @@ import { Container, Col, Row } from "react-bootstrap";
 import NoteEditor from "./NoteEditor";
 import NoteList from "./NoteList";
 import SidePanel from "./SidePanel";
-import ChangeNotebook from "./ChangeNotebook";
 
 export default function Dashboard() {
   const [saveCount, setSaveCount] = useState(0);

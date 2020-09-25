@@ -47,13 +47,13 @@ const NoteList = (props) => {
     // allNotesArray.sort(function(a,b){
     //   return b.updatedAt-a.updatedAt;
     // });
-    console.log(allNotesArray)
     return (
       <div className='overflow-auto'>
         <h3 className="d-flex py-2 my-2 justify-content-center"> <JournalText className='mx-2'/>All Notes</h3>
         {allNotesArray.map((note) => {
           return (
             <Link
+              key={note.id}
               className="special_a"
               to={`/dashboard/${notebookId}/${note.id}`}
             >
@@ -97,7 +97,6 @@ const NoteList = (props) => {
     // noteBookArray.sort(function(a,b){
     //   return b.updatedAt-a.updatedAt;
     // });
-    console.log(noteBookArray)
     return (
       <>
         <h3 className="d-flex py-2 my-2 justify-content-center"><Journals className='mx-2'/>{bookName}</h3>

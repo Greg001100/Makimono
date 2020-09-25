@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Form, Button, Col, Alert, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAuth, signIn } from "../actions/authentication";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import DemoButton from "./DemoButton";
-import { Star, StarFill } from "react-bootstrap-icons";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -20,7 +19,6 @@ function SignIn() {
     await dispatch(removeAuth());
     const storeReady = await dispatch(signIn(email, password, csurf));
     if (storeReady) {
-      console.log(storeReady);
       history.push(
         `/dashboard/${storeReady.latest_note[0]}/${storeReady.latest_note[1]}`
       );
@@ -82,8 +80,6 @@ function SignIn() {
               setPassword={setPassword}
             />
           </Form>
-          <br></br>
-          <Link to="/signup">Don't have an account?</Link>
         </Col>
       </Row>
     </Container>

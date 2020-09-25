@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, Form } from "react-bootstrap";
-import SunEditor, { buttonList } from "suneditor-react";
+import { Form } from "react-bootstrap";
+import SunEditor from "suneditor-react";
 import "../../node_modules/suneditor/dist/css/suneditor.min.css";
 import { useDispatch } from "react-redux";
 import {
-  createNote,
   updateNote,
   getNote,
   getBookName,
-  newNotebook,
 } from "../actions/notes";
 import { useParams } from "react-router-dom";
 import { ArrowRightCircleFill, Check2, Journals } from "react-bootstrap-icons";
@@ -67,11 +65,10 @@ const NoteEditor = (props) => {
     }
     setSaving(true);
     const timer = setTimeout(async () => {
-      const savedNote = await dispatch(
+      await dispatch(
         updateNote(noteId, title, notebookId, content)
       );
       await props.setSaveCount(props.saveCount + 1);
-      await console.log("saved");
       await setSaving(false);
     }, 200);
     return () => clearTimeout(timer);
