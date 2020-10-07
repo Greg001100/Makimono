@@ -1,5 +1,5 @@
 # Makimono
-Makimono is a note taking web app that allows users to create notes with rich text editing and organize them in notebooks, inspired by Evernote. Designed using React, Redux, and bootstrap CSS on the front end, with Flask and SQLAlchemy to handle the back end.
+Makimono is a note taking web app that allows users to create notes with rich text editing and organize them in notebooks, inspired by Evernote. Designed using React / Redux, and bootstrap CSS on the front end, with Flask and SQLAlchemy to handle the back end.
 
 [Makimono Live](https://makimono-scrolls.herokuapp.com/)
 
