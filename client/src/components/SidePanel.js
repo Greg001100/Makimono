@@ -7,6 +7,7 @@ import Notebooks from "./Notebooks";
 import NewNotebook from "./NewNotebook";
 import Shortcuts from "./Shortcuts";
 import { JournalText } from "react-bootstrap-icons";
+import About from "./About";
 
 const SidePanel = (props) => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const SidePanel = (props) => {
         setAllNotes={(boolean) => props.setAllNotes(boolean)}
         updateCount={props.updateCount}
       />
-
+      <About />
     </>
   );
 };
