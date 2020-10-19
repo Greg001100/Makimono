@@ -24,7 +24,7 @@ const About = (props) => {
           className="sp-text"
         >
           {arrowDown ? <CaretDownFill /> : <CaretRightFill />}
-          About the Developer
+           <span className="sp-text"> About the Developer</span>
         </button>
         <Collapse in={open}>
           <div className="sp-text mx-4" id="notebook-list">

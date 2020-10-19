@@ -86,10 +86,11 @@ const Notebooks = (props) => {
                   >
                     {notebook.title}
                   </Link>
-                  <OptionsPop
+                  {notebookArray.length>1? <OptionsPop
                     notebookId={notebook.id}
                     setUpdateCount={(count) => props.setUpdateCount(count)}
                   />
+                  : null}
                 </p>
               );
             })}

@@ -18,6 +18,7 @@
 
 .sp-text {
     color: rgb(156, 156, 156);
+    white-space: pre;
 }
 
 .large-text {
