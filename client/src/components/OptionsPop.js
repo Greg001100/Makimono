@@ -60,7 +60,7 @@ const OptionsPop = (props) => {
           <Modal.Title>Rename Notebook</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Label>Enter a new name</Form.Label>
             <Form.Control
               type="text"
