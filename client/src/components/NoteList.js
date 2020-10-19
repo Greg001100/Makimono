@@ -55,7 +55,7 @@ const NoteList = (props) => {
             <Link
               key={note.id}
               className="special_a"
-              to={`/dashboard/${notebookId}/${note.id}`}
+              to={`/dashboard/${note.notebook}/${note.id}`}
             >
               <Card className="content_card overflow-hidden bg-light">
                 <Card.Body className="overflow-hidden ">
