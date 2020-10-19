@@ -62,7 +62,7 @@ const Shortcuts = (props) => {
             })}
             {noteArray.map((note) => {
               return (
-                <p clasName='my-0 py-0' key={note.id}>
+                <p className='my-0 py-0' key={note.id}>
                   <JournalText className='mx-2'/>
                   <Link
                     className="sp-text"

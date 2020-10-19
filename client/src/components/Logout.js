@@ -8,7 +8,7 @@ const Logout = () => {
 
     return (
         <>
-            <button className='justify-self-end align-self-start sp-text my-3' onClick={handleClick}>Logout</button>
+            <button className='justify-self-end align-self-start sp-text logout' onClick={handleClick}>Logout</button>
         </>
     )
 }
